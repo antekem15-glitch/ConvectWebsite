@@ -8,6 +8,14 @@ export default function CookieBanner() {
     if (!consent) {
       setVisible(true);
     }
+
+    // Hört auf den Widerruf-Klick aus dem Footer
+    const handleShowBanner = () => {
+      setVisible(true);
+    };
+
+    window.addEventListener('show-cookie-banner', handleShowBanner);
+    return () => window.removeEventListener('show-cookie-banner', handleShowBanner);
   }, []);
 
   const handleAccept = () => {
@@ -26,7 +34,7 @@ export default function CookieBanner() {
     <div
       role="region"
       aria-label="Cookie-Einstellungen"
-      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 p-6 rounded-xl bg-[#1E293B] border border-slate-700 shadow-2xl text-white"
+      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 p-6 rounded-xl bg-[#1E293B] border border-slate-700 shadow-2xl text-white animate-in fade-in duration-200"
     >
       <div className="flex items-center gap-2 mb-3">
         <span className="w-2 h-2 rounded-full bg-blue-500" />
@@ -39,17 +47,18 @@ export default function CookieBanner() {
         </a>.
       </p>
 
-      {/* Vollständige Gleichwertigkeit der Buttons nach DACH / DSGVO */}
       <div className="mt-5 grid grid-cols-2 gap-3">
         <button
+          type="button"
           onClick={handleDecline}
-          className="py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 text-xs font-bold transition-colors"
+          className="py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 text-xs font-bold transition-colors cursor-pointer"
         >
           Nur Notwendige
         </button>
         <button
+          type="button"
           onClick={handleAccept}
-          className="py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors"
+          className="py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors cursor-pointer"
         >
           Alle Akzeptieren
         </button>

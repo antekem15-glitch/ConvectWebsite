@@ -67,18 +67,18 @@ export default function LegalFooter() {
                 </button>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
-                    localStorage.removeItem('convect_cookie_consent');
-                    window.location.reload();
-                  }}
-                  className="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
-                >
-                  <span className="text-slate-600 group-hover:text-blue-400 transition-colors">›</span>
-                  <span>Cookie-Einstellungen widerrufen</span>
-                </button>
-              </li>
+  <button
+    type="button"
+    onClick={() => {
+      localStorage.removeItem('convect_cookie_consent');
+      window.dispatchEvent(new Event('show-cookie-banner'));
+    }}
+    className="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors cursor-pointer text-left"
+  >
+    <span className="text-slate-600 group-hover:text-blue-400 transition-colors">›</span>
+    <span>Cookie-Einstellungen widerrufen</span>
+  </button>
+</li>
             </ul>
           </div>
 

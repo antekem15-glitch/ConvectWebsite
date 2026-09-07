@@ -1,14 +1,14 @@
 import React, { useState, Suspense, lazy } from 'react';
 import HeroAuthority from './components/HeroAuthority';
 import NicheMatrix from './components/NicheMatrix';
+import CookieBanner from './components/CookieBanner'; // SOFORT geladen, damit Erstbesucher das Banner direkt sehen
 
-// Untere Abschnitte asynchron laden für minimalen Initial-JS-Payload
+// Große Abschnitte unterhalb des Folds bleiben lazy für Ladezeit < 1.0s
 const ProblemSpeedLeak = lazy(() => import('./components/ProblemSpeedLeak'));
 const SolutionPillars = lazy(() => import('./components/SolutionPillars'));
 const PricingMatrix = lazy(() => import('./components/PricingMatrix'));
 const LeadQualifierFunnel = lazy(() => import('./components/LeadQualifierFunnel'));
 const LegalFooter = lazy(() => import('./components/LegalFooter'));
-const CookieBanner = lazy(() => import('./components/CookieBanner'));
 
 export default function App() {
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -27,6 +27,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0B0F17] text-white selection:bg-blue-600 selection:text-white">
+      {/* Top Navigation */}
       <header className="fixed top-0 left-0 right-0 z-40 bg-[#0B0F17]/80 backdrop-blur-md border-b border-slate-800/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <button
@@ -50,7 +51,7 @@ export default function App() {
         <HeroAuthority onCtaClick={() => scrollToFunnel()} />
         <NicheMatrix />
 
-        {/* Nachgelagert */}
+        {/* Nachgelagerte Sektionen */}
         <Suspense fallback={<div className="py-12 bg-[#0B0F17]" />}>
           <ProblemSpeedLeak />
           <SolutionPillars />
@@ -60,9 +61,11 @@ export default function App() {
             onResetPlan={() => setSelectedPlan(null)}
           />
           <LegalFooter />
-          <CookieBanner />
         </Suspense>
       </main>
+
+      {/* Liegt außerhalb des lazy Suspense: erscheint sofort beim 1. Aufruf */}
+      <CookieBanner />
     </div>
   );
 }
