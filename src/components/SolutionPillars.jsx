@@ -6,7 +6,7 @@ export default function SolutionPillars() {
       step: '01',
       name: 'Ultra-Fast Frontend',
       tech: 'React / Vite / Tailwind CSS',
-      benefit: 'Sub-Sekunden Ladezeit. Keine Plugins. Kein WordPress.',
+      benefit: 'Garantierte Ladezeit unter 1,5s. Keine Plugins. Kein WordPress.',
       desc: 'Wir schreiben sauberen, schlanken Quellcode. Ihre Seite lädt mobil in unter einer Sekunde. Google belohnt das mit Top-Rankings, und bezahlte Werbekampagnen konvertieren ohne Absprungverluste.',
     },
     {

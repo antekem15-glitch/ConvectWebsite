@@ -12,7 +12,7 @@ export default function HeroAuthority({ onCtaClick }) {
           {/* Live Performance & Authority Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-slate-800 text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-8 shadow-inner">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span>Google PageSpeed: 99/100 | LCP &lt; 0.9s | Zero-Bloat Code</span>
+            <span>Garantierte Ladezeit: &lt; s1.5s | Google PageSpeed 95+ | Zero-Bloat Code</span>
           </div>
 
           {/* Hard-Hitting Direct-Response Headline */}
@@ -52,7 +52,7 @@ export default function HeroAuthority({ onCtaClick }) {
           {/* Proof / Trust Metrics */}
           <div className="mt-16 pt-12 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
             <div>
-              <div className="text-3xl font-bold text-white">&lt; 1.0 Sek.</div>
+              <div className="text-3xl font-bold text-white">&lt; 1.5 Sek.</div>
               <div className="text-xs text-slate-400 uppercase tracking-wider mt-1">Garantierte Ladezeit</div>
             </div>
             <div>
