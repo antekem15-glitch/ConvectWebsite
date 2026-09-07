@@ -117,9 +117,9 @@ export default function LeadQualifierFunnel({ selectedPlan, onResetPlan }) {
           
           {/* Step Indicators */}
           <div className="flex justify-between items-center mb-8 border-b border-slate-800 pb-4">
-            <span className={`text-xs font-bold ${step >= 1 ? 'text-blue-400' : 'text-slate-600'}`}>1. Branche</span>
-            <span className={`text-xs font-bold ${step >= 2 ? 'text-blue-400' : 'text-slate-600'}`}>2. Deal-Größe</span>
-            <span className={`text-xs font-bold ${step >= 3 ? 'text-blue-400' : 'text-slate-600'}`}>3. Kontakt</span>
+            <span className={`text-xs font-bold ${step >= 1 ? 'text-blue-400' : 'text-slate-400'}`}>1. Branche</span>
+            <span className={`text-xs font-bold ${step >= 2 ? 'text-blue-400' : 'text-slate-400'}`}>2. Deal-Größe</span>
+            <span className={`text-xs font-bold ${step >= 3 ? 'text-blue-400' : 'text-slate-400'}`}>3. Kontakt</span>
           </div>
 
           {/* STEP 1: BRANCHE */}

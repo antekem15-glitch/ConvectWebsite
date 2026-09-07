@@ -36,8 +36,8 @@ export default function PricingMatrix({ onSelectTier }) {
                 <li className="flex items-center gap-2">✓ Google PageSpeed Score 95+ garantiert</li>
                 <li className="flex items-center gap-2">✓ 1x Direct-Response Landingpage</li>
                 <li className="flex items-center gap-2">✓ Basis Make.com Lead-Weiterleitung (E-Mail)</li>
-                <li className="flex items-center gap-2 text-slate-500">✕ Keine KI-Vorqualifizierung</li>
-                <li className="flex items-center gap-2 text-slate-500">✕ Keine SMS-Eil-Alerts / No-Show-Sequenz</li>
+                <li className="flex items-center gap-2 text-slate-400">✕ Keine KI-Vorqualifizierung</li>
+                <li className="flex items-center gap-2 text-slate-400">✕ Keine SMS-Eil-Alerts / No-Show-Sequenz</li>
               </ul>
             </div>
             <button

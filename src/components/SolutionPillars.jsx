@@ -36,7 +36,7 @@ export default function SolutionPillars() {
           <p className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight">
             Die 3-Säulen-Infrastruktur für maximale Abschlussquoten.
           </p>
-          <p className="mt-4 text-slate-400">
+          <p className="mt-4 text-slate-300">
             Verkaufserfolg im High-Ticket-Segment ist keine Frage von „schönen Bildern“, sondern von Geschwindigkeit, Psychologie und prozessualer Disziplin.
           </p>
         </div>
@@ -49,14 +49,15 @@ export default function SolutionPillars() {
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-3xl font-black text-slate-700">{pillar.step}</span>
+                  {/* Kontrast korrigiert von text-slate-700 zu text-slate-400 */}
+                  <span className="text-3xl font-black text-slate-400">{pillar.step}</span>
                   <span className="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-800/40">
                     {pillar.tech}
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{pillar.name}</h3>
                 <p className="text-sm font-semibold text-blue-400 mb-4">{pillar.benefit}</p>
-                <p className="text-sm text-slate-400 leading-relaxed">{pillar.desc}</p>
+                <p className="text-sm text-slate-300 leading-relaxed">{pillar.desc}</p>
               </div>
             </div>
           ))}
