@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import HeroAuthority from './components/HeroAuthority';
-import NicheMatrix from './components/NicheMatrix';
 import CookieBanner from './components/CookieBanner';
 
-// Untere Abschnitte erst laden, wenn der Hero fertig gerendert ist
+// Alle nicht direkt sichtbaren Bereiche streng lazy laden
+const NicheMatrix = lazy(() => import('./components/NicheMatrix'));
 const ProblemSpeedLeak = lazy(() => import('./components/ProblemSpeedLeak'));
 const SolutionPillars = lazy(() => import('./components/SolutionPillars'));
 const PricingMatrix = lazy(() => import('./components/PricingMatrix'));
@@ -12,17 +12,30 @@ const LegalFooter = lazy(() => import('./components/LegalFooter'));
 
 export default function App() {
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const [loadRest, setLoadRest] = useState(false);
+  const [loadBelowFold, setLoadBelowFold] = useState(false);
 
-  // Lädt die restlichen Abschnitte verzögert nach, damit Hero & LCP ungestört sofort rendern
   useEffect(() => {
-    if ('requestIdleCallback' in window) {
-      const idleId = window.requestIdleCallback(() => setLoadRest(true));
-      return () => window.cancelIdleCallback(idleId);
-    } else {
-      const timer = setTimeout(() => setLoadRest(true), 200);
-      return () => clearTimeout(timer);
-    }
+    // Lädt die restlichen Chunks erst nach der ersten Nutzerinteraktion (Scroll, Touch)
+    // oder nach 2,5 Sekunden Leerlauf, damit der Speed Index für den First Fold unter 1s bleibt.
+    const triggerLoad = () => {
+      setLoadBelowFold(true);
+      window.removeEventListener('scroll', triggerLoad);
+      window.removeEventListener('touchstart', triggerLoad);
+      window.removeEventListener('mousemove', triggerLoad);
+    };
+
+    window.addEventListener('scroll', triggerLoad, { passive: true });
+    window.addEventListener('touchstart', triggerLoad, { passive: true });
+    window.addEventListener('mousemove', triggerLoad, { passive: true });
+
+    const timer = setTimeout(triggerLoad, 2500);
+
+    return () => {
+      window.removeEventListener('scroll', triggerLoad);
+      window.removeEventListener('touchstart', triggerLoad);
+      window.removeEventListener('mousemove', triggerLoad);
+      clearTimeout(timer);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -31,13 +44,13 @@ export default function App() {
 
   const scrollToFunnel = (plan = null) => {
     if (plan) setSelectedPlan(plan);
-    setLoadRest(true);
+    setLoadBelowFold(true);
     setTimeout(() => {
       const funnelEl = document.getElementById('funnel');
       if (funnelEl) {
         funnelEl.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 50);
+    }, 60);
   };
 
   return (
@@ -62,13 +75,13 @@ export default function App() {
       </header>
 
       <main>
-        {/* Sofort sichtbarer Bereich (Above-The-Fold) -> LCP Priorität */}
+        {/* Der einzige Bereich, der für den First-Fold-Speed gerendert werden muss */}
         <HeroAuthority onCtaClick={() => scrollToFunnel()} />
-        <NicheMatrix />
 
-        {/* Deferred Sections: blockieren weder LCP noch First Paint */}
-        {loadRest ? (
+        {/* Alles unterhalb des Hero-Folds lädt entkoppelt */}
+        {loadBelowFold ? (
           <Suspense fallback={<div className="h-64 bg-[#0B0F17]" />}>
+            <NicheMatrix />
             <ProblemSpeedLeak />
             <SolutionPillars />
             <PricingMatrix onSelectTier={(tier) => scrollToFunnel(tier)} />
